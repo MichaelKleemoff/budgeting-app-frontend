@@ -18,7 +18,7 @@ function Transactions() {
 			.get(`${API}/transactions`)
 			.then((response) => {
 				setTransactions(response.data);
-				console.log(response.data);
+				// console.log(response.data);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -30,37 +30,52 @@ function Transactions() {
 	});
 
 	const totalTransAmount = transAmountArray.reduce(
-		(prevAmount, currentAmount, index) => {
+		(prevAmount, currentAmount) => {
 			return Number(prevAmount + currentAmount);
 		},
 		0
 	);
 
+	let colorTotalTransAmount = '';
+
+	if (totalTransAmount > 1000) {
+		colorTotalTransAmount = 'green';
+	} else if (totalTransAmount >= 0 && totalTransAmount <= 1000) {
+		colorTotalTransAmount = 'gray';
+	} else {
+		colorTotalTransAmount = 'red';
+	}
+
 	return (
-		<div className='Transactions m-3 p-3'>
-			<Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>Date</th>
-						<th>Transaction</th>
-						<th>Type</th>
-						<th>$ Amount</th>
-					</tr>
-				</thead>
-				<tbody>
-					{transactions.map((transaction, index) => {
-						return (
-							<Transaction
-								key={index}
-								transaction={transaction}
-								index={index}
-							/>
-						);
-					})}
-				</tbody>
-			</Table>
-			<h2>Total: ${totalTransAmount}</h2>
-		</div>
+		<>
+			<h3>
+				Total:{' '}
+				<span style={{ color: colorTotalTransAmount }}>{totalTransAmount}</span>
+			</h3>
+			<div className='Transactions m-3 p-3'>
+				<Table striped bordered hover>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Transaction</th>
+							<th>Type</th>
+							<th>$ Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{transactions.map((transaction, index) => {
+							return (
+								<Transaction
+									key={index}
+									transaction={transaction}
+									index={index}
+								/>
+							);
+						})}
+					</tbody>
+				</Table>
+			</div>
+		</>
 	);
 }
 

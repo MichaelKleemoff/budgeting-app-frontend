@@ -82,6 +82,7 @@ body {
 .Home h2,
 .Home h4,
 .Index h2,
+.Index h3,
 .New h2,
 .Edit h2,
 .FourOFour h2,
@@ -144,10 +145,12 @@ tbody {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 75vw;
-	height: 40vh;
+	width: 75%;
+	height: 40%;
 	border: 3px outset goldenrod;
 	margin: 25px auto;
+	padding-top: 20px;
+	padding-bottom: 15px;
 	background-color: rgb(181, 250, 227);
 }
 

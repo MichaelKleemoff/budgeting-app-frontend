@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # budgeting-app-frontend
 
-This is the *React.js* frontend repo for my **Budgeting App**.
+This is the *React.js* frontend repo for my **Budgeting App*.

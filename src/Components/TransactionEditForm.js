@@ -15,7 +15,7 @@ function TransactionEditForm() {
 
 	const [transaction, setTransaction] = useState({
 		item_name: '',
-		amount: '',
+		amount: 0,
 		date: '',
 		from: '',
 		category: '',
@@ -45,10 +45,17 @@ function TransactionEditForm() {
 		setTransaction({ ...transaction, [event.target.id]: event.target.value });
 	};
 
-	const handleCheckboxChange = (event) => {
+	const handleRadioButtonChange = (event) => {
 		setTransaction({
 			...transaction,
 			type: event.target.value,
+		});
+	};
+
+	const handleSelectChange = (event) => {
+		setTransaction({
+			...transaction,
+			category: event.target.value,
 		});
 	};
 
@@ -56,12 +63,6 @@ function TransactionEditForm() {
 		event.preventDefault();
 		updateTransaction();
 	};
-
-	if (transaction.type === 'credit') {
-		transaction.amount = -Number(transaction.amount);
-	} else {
-		transaction.amount = Number(transaction.amount);
-	}
 
 	return (
 		<>
@@ -112,13 +113,29 @@ function TransactionEditForm() {
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='category'>
 					<Form.Label>Category:</Form.Label>
-					<Form.Control
+					<Form.Select
 						name='category'
 						value={transaction.category}
 						placeholder='Type of Transaction'
 						required
-						onChange={handleTextChange}
-					/>
+						onChange={handleSelectChange}
+					>
+						<option>-- Please select a category --</option>
+						<option value='Personal Checking'>Personal Checking</option>
+						<option value='Personal Savings'>Personal Savings</option>
+						<option value='Business Checking'>Business Checking</option>
+						<option value='Business Savings'>Business Savings</option>
+						<option value='Income'>Income</option>
+						<option value='Car Finance'>Car Finance</option>
+						<option value='Car Insurance'>Car Insurance</option>
+						<option value='Gasoline'>Gasoline</option>
+						<option value='Electricity'>Electricity</option>
+						<option value='Internet/Cable'>Internet/Cable</option>
+						<option value='Groceries'>Groceries</option>
+						<option value='Clothes'>Clothes</option>
+						<option value='Entertainment'>Entertainment</option>
+						<option value='Miscellaneous'>Miscellaneous</option>
+					</Form.Select>
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='description'>
 					<Form.Label>Description:</Form.Label>
@@ -144,7 +161,7 @@ function TransactionEditForm() {
 								id={`inline-${type}-credit`}
 								value='credit'
 								checked={transaction.type === 'credit'}
-								onChange={handleCheckboxChange}
+								onChange={handleRadioButtonChange}
 							/>
 							<Form.Check
 								inline
@@ -154,7 +171,7 @@ function TransactionEditForm() {
 								id={`inline-${type}-debit`}
 								value='debit'
 								checked={transaction.type === 'debit'}
-								onChange={handleCheckboxChange}
+								onChange={handleRadioButtonChange}
 							/>
 						</div>
 					))}

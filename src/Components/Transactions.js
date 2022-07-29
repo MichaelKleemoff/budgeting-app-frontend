@@ -26,12 +26,12 @@ function Transactions() {
 	}, []);
 
 	const transAmountArray = transactions.map((transaction) => {
-		return transaction.amount;
+		return Number(transaction.amount);
 	});
 
 	const totalTransAmount = transAmountArray.reduce(
 		(prevAmount, currentAmount, index) => {
-			return prevAmount + currentAmount;
+			return Number(prevAmount + currentAmount);
 		},
 		0
 	);

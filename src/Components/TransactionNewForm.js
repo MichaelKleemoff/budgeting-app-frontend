@@ -10,17 +10,17 @@ import Button from 'react-bootstrap/Button';
 const API = process.env.REACT_APP_API_URL;
 
 function TransactionNewForm() {
+	const navigate = useNavigate();
+
 	const [transaction, setTransaction] = useState({
 		item_name: '',
-		amount: '',
+		amount: 0,
 		date: '',
 		from: '',
 		category: '',
 		description: '',
 		type: '',
 	});
-
-	const navigate = useNavigate();
 
 	const addTransaction = () => {
 		axios
@@ -35,10 +35,17 @@ function TransactionNewForm() {
 		setTransaction({ ...transaction, [event.target.id]: event.target.value });
 	};
 
-	const handleCheckboxChange = () => {
+	const handleRadioButtonChange = (event) => {
 		setTransaction({
 			...transaction,
-			credit: !transaction.credit,
+			type: event.target.value,
+		});
+	};
+
+	const handleSelectChange = (event) => {
+		setTransaction({
+			...transaction,
+			category: event.target.value,
 		});
 	};
 
@@ -46,15 +53,13 @@ function TransactionNewForm() {
 		event.preventDefault();
 		addTransaction();
 	};
+
 	return (
-		<div>
+		<>
 			<Form className='transaction-new' onSubmit={handleSubmit}>
 				<Form.Group as={Row} className='m-2' size='md' controlId='item_name'>
-					<Form.Label htmlFor='item_name' column sm={2}>
-						Transaction:
-					</Form.Label>
+					<Form.Label>Transaction:</Form.Label>
 					<Form.Control
-						id='item_name'
 						name='item_name'
 						type='text'
 						onChange={handleTextChange}
@@ -63,9 +68,8 @@ function TransactionNewForm() {
 					/>
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='amount'>
-					<Form.Label htmlFor='amount'>$ Amount: </Form.Label>
+					<Form.Label>$ Amount: </Form.Label>
 					<Form.Control
-						id='amount'
 						name='amount'
 						type='text'
 						placeholder='Amount'
@@ -74,9 +78,8 @@ function TransactionNewForm() {
 					/>
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='date'>
-					<Form.Label htmlFor='date'>Date:</Form.Label>
+					<Form.Label>Date:</Form.Label>
 					<Form.Control
-						id='date'
 						type='date'
 						name='date'
 						placeholder='mm/dd/yyyy'
@@ -85,9 +88,8 @@ function TransactionNewForm() {
 					/>
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='from'>
-					<Form.Label htmlFor='from'>From:</Form.Label>
+					<Form.Label>From:</Form.Label>
 					<Form.Control
-						id='from'
 						type='text'
 						name='from'
 						placeholder='From'
@@ -96,23 +98,67 @@ function TransactionNewForm() {
 					/>
 				</Form.Group>
 				<Form.Group as={Row} className='m-2' controlId='amount'>
-					<Form.Label htmlFor='category'>Category:</Form.Label>
-					<Form.Control
-						id='category'
+					<Form.Label>Category:</Form.Label>
+					<Form.Select
 						name='category'
 						placeholder='Type of Transaction'
+						required
+						onChange={handleSelectChange}
+					>
+						<option>-- Please select a category --</option>
+						<option value='Personal Checking'>Personal Checking</option>
+						<option value='Personal Savings'>Personal Savings</option>
+						<option value='Business Checking'>Business Checking</option>
+						<option value='Business Savings'>Business Savings</option>
+						<option value='Income'>Income</option>
+						<option value='Car Finance'>Car Finance</option>
+						<option value='Car Insurance'>Car Insurance</option>
+						<option value='Gasoline'>Gasoline</option>
+						<option value='Electricity'>Electricity</option>
+						<option value='Internet/Cable'>Internet/Cable</option>
+						<option value='Groceries'>Groceries</option>
+						<option value='Clothes'>Clothes</option>
+						<option value='Entertainment'>Entertainment</option>
+						<option value='Miscellaneous'>Miscellaneous</option>
+					</Form.Select>
+				</Form.Group>
+				<Form.Group as={Row} className='m-2' controlId='description'>
+					<Form.Label>Description:</Form.Label>
+					<Form.Control
+						name='description'
+						as='textarea'
+						style={{ height: '100px' }}
+						placeholder='Description'
 						required
 						onChange={handleTextChange}
 					/>
 				</Form.Group>
-				<Form.Group className='m-2' controlId='credit'>
-					<Form.Label htmlFor='credit'>Credit:</Form.Label>{' '}
-					<Form.Control
-						id='credit'
-						type='checkbox'
-						onChange={handleCheckboxChange}
-						checked={transaction.credit}
-					/>
+				<Form.Group as={Row} className='m-2' controlId='type'>
+					<Form.Label>Type:</Form.Label>
+					{['radio'].map((type) => (
+						<div key={`inline-${type}`} className='mt-2 ms-3 mb-4'>
+							<Form.Check
+								inline
+								label='credit'
+								name='type'
+								type={type}
+								id={`inline-${type}-credit`}
+								value='credit'
+								checked={transaction.type === 'credit'}
+								onChange={handleRadioButtonChange}
+							/>
+							<Form.Check
+								inline
+								label='debit'
+								name='type'
+								type={type}
+								id={`inline-${type}-debit`}
+								value='debit'
+								checked={transaction.type === 'debit'}
+								onChange={handleRadioButtonChange}
+							/>
+						</div>
+					))}
 				</Form.Group>
 				<div className='showNavigation'>
 					<Link to='/transactions'>
@@ -135,7 +181,7 @@ function TransactionNewForm() {
 					/>
 				</div>
 			</Form>
-		</div>
+		</>
 	);
 }
 

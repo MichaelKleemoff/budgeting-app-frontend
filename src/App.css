@@ -1,1 +1,177 @@
 /** @format */
+
+* {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav {
+	background-color: rgb(234, 203, 154);
+}
+.nav-span {
+	color: olivedrab;
+	transition-duration: 0.4s;
+}
+
+.nav-span:hover {
+	background-color: gold;
+	color: azure;
+	padding: 8px;
+	border-radius: 5px;
+	font-weight: 600;
+	transition: all 0.7s;
+}
+
+body {
+	background: lightgoldenrodyellow;
+}
+
+.Home {
+	text-align: center;
+}
+
+.home-link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: azure;
+}
+
+.home-link-button {
+	transition: 0.4s;
+}
+
+.home-link-button:hover {
+	background-color: gold;
+	color: olivedrab;
+	padding: 8px;
+	border-radius: 5px;
+	font-weight: bolder;
+	transition: all 0.7s ease-in;
+}
+
+.navbar-new-button {
+	transition: 0.4s;
+}
+
+.navbar-new-button:hover {
+	background-color: gold;
+	color: olivedrab;
+	padding: 8px;
+	border-radius: 5px;
+	font-weight: bolder;
+	transition: all 0.7s;
+}
+
+.New,
+.Edit {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 60vw;
+	height: auto;
+	margin: 15px 20vw;
+}
+
+.Home,
+.Index,
+.Show {
+	margin-top: 15px;
+}
+
+.Home h2,
+.Home h4,
+.Index h2,
+.New h2,
+.Edit h2,
+.FourOFour h2,
+.Show h2 {
+	color: goldenrod;
+	text-align: center;
+}
+
+.Home h4 {
+	font-family: cursive;
+}
+
+Table tbody tr:nth-child(odd) {
+	background: rgb(235, 235, 141);
+}
+
+Table tbody tr:nth-child(even) {
+	background: rgb(211, 236, 191);
+}
+
+Table thead {
+	background: azure;
+	color: goldenrod;
+}
+
+Table thead,
+tbody {
+	border: 5px solid rgb(99, 213, 213);
+}
+
+.transLink-td-color {
+	color: rgb(104, 21, 140);
+	text-decoration: none;
+	transition: 0.4s;
+}
+
+.transLink-td-color:hover {
+	background-color: gold;
+	color: azure;
+	padding: 8px;
+	border-radius: 5px;
+	font-weight: 600;
+	transition: all 0.7s;
+}
+
+.showNavigation {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.checkbox {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.transaction-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 75vw;
+	height: 40vh;
+	border: 3px outset goldenrod;
+	margin: 25px auto;
+	background-color: rgb(181, 250, 227);
+}
+
+.transaction-details h3 {
+	font-family: Haettenschweiler;
+	font-size: 2rem;
+	color: rgb(16, 137, 18);
+}
+
+.transaction-details p strong {
+	font-size: 1.1rem;
+	color: rgb(16, 137, 18);
+}
+
+.transaction-new,
+.transaction-edit {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: left;
+	width: 60vw;
+	height: 100%;
+	border: 3px outset goldenrod;
+	margin: 15px auto;
+	padding: 10px 40px;
+	background-color: rgb(181, 250, 227);
+}

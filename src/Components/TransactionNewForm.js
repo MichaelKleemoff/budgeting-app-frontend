@@ -70,9 +70,10 @@ function TransactionNewForm() {
 				<Form.Group as={Row} className='m-2' controlId='amount'>
 					<Form.Label>$ Amount: </Form.Label>
 					<Form.Control
+						as='textarea'
 						name='amount'
 						type='text'
-						placeholder='Amount'
+						placeholder='Amount (Please enter numbers only. Prefix a minus for debits.)'
 						required
 						onChange={handleTextChange}
 					/>

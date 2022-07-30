@@ -50,7 +50,9 @@ function Transactions() {
 		<>
 			<h3>
 				Total:{' '}
-				<span style={{ color: colorTotalTransAmount }}>{totalTransAmount}</span>
+				<span style={{ color: colorTotalTransAmount }}>
+					${totalTransAmount}
+				</span>
 			</h3>
 			<div className='Transactions m-3 p-3'>
 				<Table striped bordered hover>
